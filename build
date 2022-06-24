@@ -16,6 +16,8 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    outputs:
+      apk: ${{ steps.apkoutput.outputs.apkfile }}
 
     steps:
     - uses: actions/checkout@v3
@@ -23,12 +25,17 @@ jobs:
       uses: actions/setup-python@v3
       with:
         python-version: "3.10"
-    - name: Install dependencies of p4a
+    - id: setuppip
       run: |
-        python -m pip install --upgrade pip
-        pip install cython virtualenv python-for-android
-        pip install -r requirements.txt
-        dpkg --add-architecture i386
-        apt-get update && apt-get upgrade
-        apt-get install -y build-essential ccache git zlib1g-dev python3 python3-dev libncurses5:i386 libstdc++6:i386 zlib1g:i386 openjdk-8-jdk unzip ant ccache autoconf libtool libssl-dev
-        
+        python3 -m pip install --upgrade pip
+        sudo apt-get update
+    - id: setupbuildozer
+      run: |
+        sudo apt-get install -y git zip unzip openjdk-13-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev
+        python3 -m pip install --upgrade buildozer
+        python3 -m pip install --upgrade Cython==0.29.19 virtualenv
+        export PATH=$PATH:~/.local/bin/
+    - id: building
+      run: python3 -m buildozer -v android debug
+    - id: apkoutput
+      run: echo "::set-output name=apkfile::$(cat $(find . -name "*.apk"))"
