@@ -13,7 +13,7 @@ package.domain = lapismyt.cookieminer
 source.dir = .
 
 # (list) Source files to include (let empty to include all the files)
-source.include_exts = py,png,txt,ogg,
+source.include_exts = py,png,txt,ogg,ttf
 
 # (list) List of inclusions using pattern matching
 #source.include_patterns = assets/*,images/*.png
@@ -22,11 +22,11 @@ source.include_exts = py,png,txt,ogg,
 source.exclude_exts = spec,md
 
 # (list) List of directory to exclude (let empty to not exclude anything)
-#source.exclude_dirs = tests, bin, venv
+source.exclude_dirs = tests, bin, venv
 
 # (list) List of exclusions using pattern matching
 # Do not prefix with './'
-source.exclude_patterns = LICENSE,build
+source.exclude_patterns = LICENSE
 
 # (str) Application versioning (method 1)
 version = 1.0
@@ -44,10 +44,10 @@ requirements = python3,pygame
 # requirements.source.kivy = ../../kivy
 
 # (str) Presplash of the application
-presplash.filename = ./cookie.png
+presplash.filename = cookie.png
 
 # (str) Icon of the application
-icon.filename = ./cookie.png
+icon.filename = cookie.png
 
 # (str) Supported orientation (one of landscape, sensorLandscape, portrait or all)
 orientation = portrait
@@ -137,7 +137,7 @@ android.permissions = WAKE_LOCK
 android.accept_sdk_license = True
 
 # (str) Android entry point, default is ok for Kivy-based app
-android.entrypoint = lapismyt.cookieminer.MainActivity
+Android.entrypoint = lapismyt.cookieminer.MainActivity
 
 # (str) Full name including package path of the Java class that implements Android Activity
 # use that parameter together with android.entrypoint to set custom Java class instead of PythonActivity
@@ -156,7 +156,7 @@ android.activity_class_name = lapismyt.cookieminer.MainActivity
 android.service_class_name = lapismyt.cookieminer.NotificationService
 
 # (str) Android app theme, default is ok for Kivy-based app
-# android.apptheme = "@android:style/Theme.NoTitleBar"
+android.apptheme = "@android:style/Theme.NoTitleBar"
 
 # (list) Pattern to whitelist for the whole project
 #android.whitelist =
@@ -216,10 +216,10 @@ android.service_class_name = lapismyt.cookieminer.NotificationService
 
 # (str) OUYA Console category. Should be one of GAME or APP
 # If you leave this blank, OUYA support will not be enabled
-android.ouya.category = GAME
+#android.ouya.category = GAME
 
 # (str) Filename of OUYA Console icon. It must be a 732x412 png image.
-android.ouya.icon.filename = ./cookie.png
+#android.ouya.icon.filename = ./cookie.png
 
 # (str) XML file to include as an intent filters in <activity> tag
 #android.manifest.intent_filters =
