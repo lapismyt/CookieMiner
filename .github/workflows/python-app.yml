@@ -38,7 +38,7 @@ jobs:
     - name: Rename
       run: mv -u $(find bin/ -name "*.apk") debug.apk
     - name: Publish APK
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
           name: debug
-          path: out/debug.apk
+          path: bin/debug.apk
