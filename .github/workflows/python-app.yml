@@ -35,10 +35,8 @@ jobs:
         export PATH=$PATH:~/.local/bin/
     - name: Build
       run: yes | python3 -m buildozer -v android debug
-    - name: Rename
-      run: mv -u $(find bin/ -name "*.apk") debug.apk
     - name: Publish APK
       uses: actions/upload-artifact@v3
       with:
           name: debug
-          path: bin/debug.apk
+          path: bin/cookieminer-1.0-arm64-v8a_armeabi-v7a-debug.apk
