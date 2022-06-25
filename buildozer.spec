@@ -26,7 +26,7 @@ source.exclude_dirs = tests, bin, venv
 
 # (list) List of exclusions using pattern matching
 # Do not prefix with './'
-source.exclude_patterns = LICENSE,test
+source.exclude_patterns = LICENSE
 
 # (str) Application versioning (method 1)
 version = 1.0
