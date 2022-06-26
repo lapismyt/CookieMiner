@@ -66,7 +66,7 @@ orientation = portrait
 osx.python_version = 3
 
 # Kivy version to use
-osx.kivy_version = 1.9.1
+osx.kivy_version = 2.1.0
 
 #
 # Android specific
@@ -137,11 +137,11 @@ android.private_storage = True
 android.accept_sdk_license = True
 
 # (str) Android entry point, default is ok for Kivy-based app
-Android.entrypoint = lapismyt.cookieminer.MainActivity
+#Android.entrypoint = lapismyt.cookieminer.MainActivity
 
 # (str) Full name including package path of the Java class that implements Android Activity
 # use that parameter together with android.entrypoint to set custom Java class instead of PythonActivity
-android.activity_class_name = lapismyt.cookieminer.MainActivity
+#android.activity_class_name = lapismyt.cookieminer.MainActivity
 
 # (str) Extra xml to write directly inside the <manifest> element of AndroidManifest.xml
 # use that parameter to provide a filename from where to load your custom XML code
@@ -153,7 +153,7 @@ android.activity_class_name = lapismyt.cookieminer.MainActivity
 
 # (str) Full name including package path of the Java class that implements Python Service
 # use that parameter to set custom Java class instead of PythonService
-android.service_class_name = lapismyt.cookieminer.NotificationService
+#android.service_class_name = lapismyt.cookieminer.NotificationService
 
 # (str) Android app theme, default is ok for Kivy-based app
 android.apptheme = "@android:style/Theme.NoTitleBar"
@@ -219,7 +219,7 @@ android.apptheme = "@android:style/Theme.NoTitleBar"
 #android.ouya.category = GAME
 
 # (str) Filename of OUYA Console icon. It must be a 732x412 png image.
-#android.ouya.icon.filename = ./cookie.png
+#android.ouya.icon.filename = cookie.png
 
 # (str) XML file to include as an intent filters in <activity> tag
 #android.manifest.intent_filters =
