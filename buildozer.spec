@@ -13,7 +13,7 @@ package.domain = lapismyt.cookieminer
 source.dir = .
 
 # (list) Source files to include (let empty to include all the files)
-source.include_exts = py,png,txt,ogg,ttf
+source.include_exts = py,png,txt,ogg,ttf,kv,atlas
 
 # (list) List of inclusions using pattern matching
 #source.include_patterns = assets/*,images/*.png
@@ -37,7 +37,7 @@ version = 1.0
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3,pygame
+requirements = python3,kivy==2.1.0
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
@@ -80,7 +80,7 @@ fullscreen = 1
 # red, blue, green, black, white, gray, cyan, magenta, yellow, lightgray,
 # darkgray, grey, lightgrey, darkgrey, aqua, fuchsia, lime, maroon, navy,
 # olive, purple, silver, teal.
-android.presplash_color = #44FF44
+android.presplash_color = gre
 
 # (string) Presplash animation using Lottie format.
 # see https://lottiefiles.com/ for examples and https://airbnb.design/lottie/
@@ -114,7 +114,7 @@ android.permissions = WAKE_LOCK
 #android.ndk_api = 21
 
 # (bool) Use --private data storage (True) or --dir public storage (False)
-#android.private_storage = True
+android.private_storage = True
 
 # (str) Android NDK directory (if empty, it will be automatically downloaded.)
 #android.ndk_path =
