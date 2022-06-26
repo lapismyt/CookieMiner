@@ -1,51 +1,104 @@
-import sys
+import kivy
 import random
-import pygame
-from pygame.rect import Rect
+from kivy.app import App
+from kivy.lang import Builder
+from kivy.uix.screenmanager import ScreenManager
+from kivy.core.audio import SoundLoader
+clicksound = SoundLoader.load("point.ogg")
 
-pygame.init()
-pygame.font.init()
-pygame.mixer.init()
+class CookieMinerApp(App):
 
-WIDTH, HEIGHT = 640, 1028
-FPS = 30
-NAME = "Cookie Miner"
-BG_COLOR = (50, 50, 150)
-COOKIE = pygame.image.load("cookie.png")
-BG = pygame.image.load("bg.png")
-C_WIDTH = 64
-C_HEIGHT = 64
-x = WIDTH / 2 - C_WIDTH
-y = HEIGHT / 2 - C_HEIGHT
-score = 0
-screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.SCALED | pygame.FULLSCREEN)
-pygame.display.set_caption(NAME)
-clock = pygame.time.Clock()
-pixelfont = pygame.font.Font('PixelFont.ttf', 50)
-hitsound = pygame.mixer.Sound("point.ogg")
-
-running = True
-while running:
+	def build(self):
+		self.score = 0
+		self.cookie_x = random.random()
+		self.cookie_y = random.random()
+		return Builder.load_string(KV)
 	
-	clock.tick(FPS)
+	def on_start(self):
+		self.root.current = "menu"
 	
-	for event in pygame.event.get():
-		
-		if event.type == pygame.QUIT:
-			running = False
-		
-		if event.type == pygame.MOUSEBUTTONDOWN:
-			print(event.pos, x, y)
-			if event.pos[0] > x and event.pos[0] < (x + C_WIDTH) and event.pos[1] > y and event.pos[1] < (y + C_HEIGHT):
-				score += 1
-				x = random.randint(0, (WIDTH - C_WIDTH))
-				y = random.randint(0, (HEIGHT - C_HEIGHT))
-				hitsound.play()
+	def start_game(self):
+		self.root.current = "game"
 	
-	score_label = pixelfont.render(f"Score: {str(score)}", False, (255, 255, 255))
-	screen.blit(BG,  (0, 0))
-	screen.blit(COOKIE, (x, y))
-	screen.blit(score_label, (3, 1))
-	pygame.display.flip()
+	def cookie_catch(self):
+		self.score += 1
+		self.cookie_x = random.random()
+		self.cookie_y = random.random()
+		while True:
+			self.cookie_x = random.random()
+			self.cookie_y = random.random()
+			if self.cookie_x > 0.1 and self.cookie_y > 0.1:
+				print(self.root.ids.cookie.pos_hint)
+				break
+			else:
+				print(self.root.ids.cookie.pos_hint)
+				continue
+		self.root.ids.cookie.pos_hint = {"right": self.cookie_x, "top": self.cookie_y}
+		self.root.ids.score_label.text = "Score: " + str(self.score)
+		clicksound.play()
 
-pygame.quit()
+KV = """
+ScreenManager:
+	Screen:
+		name: "menu"
+		canvas.before:
+			Rectangle:
+				pos: self.pos
+				size: self.size
+				source: "bg.png"
+		BoxLayout:
+			orientation: "vertical"
+			padding: 20
+			Label:
+				text: "COOKIE MINER\\nПЕЧЕНЬКА КЛИКЕР"
+				font_name: "PixelFont.ttf"
+				color: "#000000"
+				font_size: "50sp"
+				halign: "center"
+				pos_hint_y: .75
+			Button:
+				text: "PLAY"
+				font_size: "60sp"
+				font_name: "PixelFont.ttf"
+				valign: "top"
+				halign: "center"
+				size_hint_y: .1
+				pos_hint_y: .3
+				background_down: ""
+				background_normal: ""
+				background_color: rgba(0, 0, 0, 0)
+				color: "#000000"
+				on_release: app.start_game()
+	Screen:
+		id: game_screen
+		name: "game"
+		canvas.before:
+			Rectangle:
+				pos: self.pos
+				size: self.size
+				source: "bg.png"
+		FloatLayout:
+			id: game_layout
+			Label:
+				id: score_label
+				text: "Score: " + str(app.score)
+				halign: "left"
+				font_size: "40sp"
+				font_name: "PixelFont.ttf"
+				color: "#000000"
+				pos_hint: {"top": 1, "right": .3}
+				size_hint: .1, .1
+			Button:
+				text: ""
+				id: cookie
+				pos_hint: {"right": app.cookie_x, "top": app.cookie_y}
+				size_hint: .2, .1
+				on_press: app.cookie_catch()
+				background_normal: "cookie.png"
+				background_down: "cookie.png"
+				background_color: "#FFFFFF"
+				color: rgba(0, 0, 0, 0)
+"""
+
+if __name__ == "__main__":
+	CookieMinerApp().run()
