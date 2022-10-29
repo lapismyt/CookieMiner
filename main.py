@@ -6,6 +6,7 @@ from kivy.uix.screenmanager import ScreenManager
 from kivy.core.audio import SoundLoader
 clicksound = SoundLoader.load("point.ogg")
 kivy.require("2.1.0")
+# s
 
 class CookieMinerApp(App):
 
