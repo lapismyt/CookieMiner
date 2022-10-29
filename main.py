@@ -6,7 +6,7 @@ from kivy.uix.screenmanager import ScreenManager
 from kivy.core.audio import SoundLoader
 clicksound = SoundLoader.load("point.ogg")
 kivy.require("2.1.0")
-# s
+p = SoundLoader.load("p.ogg")
 
 class CookieMinerApp(App):
 
@@ -39,6 +39,9 @@ class CookieMinerApp(App):
 		self.root.ids.score_label.text = "Score: " + str(self.score)
 		clicksound.play()
 
+        def pn(self):
+            p.play()
+
 KV = """
 ScreenManager:
 	Screen:
@@ -47,7 +50,7 @@ ScreenManager:
 			Rectangle:
 				pos: self.pos
 				size: self.size
-				source: "bg.png"
+                                source: "bg.png"
 		BoxLayout:
 			orientation: "vertical"
 			padding: 20
@@ -79,9 +82,11 @@ ScreenManager:
 				pos: self.pos
 				size: self.size
 				source: "bg.png"
+
 		FloatLayout:
 			id: game_layout
 			Label:
+                                on_touch_down: root.pn()
 				id: score_label
 				text: "Score: " + str(app.score)
 				halign: "left"
